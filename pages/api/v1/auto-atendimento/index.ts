@@ -29,7 +29,9 @@ export default function handler(
     const { cpfCnpj } = req.body
 
     if(cpfCnpj === "23536251935") {
-        const guid = uuidv4()
+        const guid :Guid = {
+            guid: uuidv4()
+        }
         res.status(200).json({data: guid})
     } else{
         const error: ResponseError = {
