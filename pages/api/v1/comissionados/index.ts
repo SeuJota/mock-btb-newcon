@@ -30,10 +30,17 @@ type ResponsePost = {
     notifications?: Notification[]
 }
 
+type ResponseError = {
+    type: string
+    title: string
+}
+
 export default function handler(
     req: NextApiRequest,
-    res: NextApiResponse<ResponseGet | ResponsePost>
+    res: NextApiResponse<ResponseGet | ResponsePost | ResponseError>
 ) {
+
+    const { idPessoa } = req.body
 
     if (req.method === 'GET') {
         const com1: Comissionado = {
@@ -62,12 +69,19 @@ export default function handler(
         res.status(200).json(response)
     }
 
-    if (req.method === 'POST') {
+    if (req.method === 'POST' && idPessoa === 1) {
         res.status(200).json({
             data: {
                 idComissionado: 1
             }
         })
+    } else {
+        const error: ResponseError = {
+            title: "Erro generico",
+            type: "Error"
+        }
+
+        res.status(400).json(error)
     }
 
 }
