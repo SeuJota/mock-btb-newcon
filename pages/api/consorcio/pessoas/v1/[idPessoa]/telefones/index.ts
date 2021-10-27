@@ -15,11 +15,11 @@ type TipoTelefone = {
 type Cidade = {
     idCidade: number
     nomeCidade: string
-    ddd: string
+    ddd: number
 }
 
 type Estado = {
-    idUf: string
+    idUf: number
     nomeEstado: string
 }
 
@@ -55,61 +55,49 @@ export default function handler(
     req: NextApiRequest,
     res: NextApiResponse<ResponseGet | ResponseError | ResponsePost>
 ) {
-    const {idPessoa} = req.query
 
     if (req.method === 'GET') {
-
-        if (idPessoa === "1") {
-
-            const tipoTelefone: TipoTelefone = {
-                idTipoTelefone: 1,
-                codigoTipoTelefone: "123",
-                nomeTipoTelefone: "Casa"
-            }
-
-            const cidade: Cidade = {
-                idCidade: 1,
-                nomeCidade: "Duque de Caxias",
-                ddd: 21
-            }
-
-            const estado: Estado = {
-                idUf: 2,
-                nomeEstado: "RJ"
-            }
-
-            const dataGet_1: DataGet = {
-                idTelefone: 1,
-                tipoTelefone: tipoTelefone,
-                cidade: cidade,
-                estado: estado,
-                numero: "123",
-                ramal: "456"
-            }
-
-            const dataGet_2: DataGet = {
-                idTelefone: 2,
-                tipoTelefone: tipoTelefone,
-                cidade: cidade,
-                estado: estado,
-                numero: "456",
-                ramal: "456"
-            }
-
-
-            const responseGet: ResponseGet = {
-                data: [dataGet_1, dataGet_2]
-            }
-
-            res.status(200).json(responseGet)
-        } else {
-            const error: ResponseError = {
-                title: "Erro generico",
-                type: "Error"
-            }
-
-            res.status(500).json(error)
+        const tipoTelefone: TipoTelefone = {
+            idTipoTelefone: 1,
+            codigoTipoTelefone: "123",
+            nomeTipoTelefone: "Casa"
         }
+
+        const cidade: Cidade = {
+            idCidade: 1,
+            nomeCidade: "Duque de Caxias",
+            ddd: 21
+        }
+
+        const estado: Estado = {
+            idUf: 2,
+            nomeEstado: "RJ"
+        }
+
+        const dataGet_1: DataGet = {
+            idTelefone: 1,
+            tipoTelefone: tipoTelefone,
+            cidade: cidade,
+            estado: estado,
+            numero: "123",
+            ramal: "456"
+        }
+
+        const dataGet_2: DataGet = {
+            idTelefone: 2,
+            tipoTelefone: tipoTelefone,
+            cidade: cidade,
+            estado: estado,
+            numero: "456",
+            ramal: "456"
+        }
+
+
+        const responseGet: ResponseGet = {
+            data: [dataGet_1, dataGet_2]
+        }
+
+        res.status(200).json(responseGet)
     }
 
     if(req.method === 'POST') {
@@ -123,7 +111,4 @@ export default function handler(
 
         res.status(200).json(responsePost)
     }
-
-
-
 }
