@@ -27,7 +27,7 @@ export default function handler(
 ) {
     const { cpfCnpj } = req.query
 
-    if(cpfCnpj === "23536251935") {
+    if(cpfCnpj === "73610725001") {
         const possuiAcesso: PossuiAcesso = {
             possuiAcesso: true
         }
