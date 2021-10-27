@@ -53,7 +53,7 @@ type ResponseError = {
 
 export default function handler(
     req: NextApiRequest,
-    res: NextApiResponse<ResponseGet | ResponseError>
+    res: NextApiResponse<ResponseGet | ResponseError | ResponsePost>
 ) {
     const {idPessoa} = req.query
 
@@ -113,27 +113,15 @@ export default function handler(
     }
 
     if(req.method === 'POST') {
-
-        if(idPessoa === "1") {
-
-            const dataPost: DataPost = {
-                idTelefone: 1
-            }
-
-            const responsePost: ResponsePost = {
-                data: dataPost
-            }
-
-            res.status(200).json(responsePost)
-        } else {
-            const error: ResponseError = {
-                title: "Erro generico",
-                type: "Error"
-            }
-
-            res.status(500).json(error)
+        const dataPost: DataPost = {
+            idTelefone: 1
         }
 
+        const responsePost: ResponsePost = {
+            data: dataPost
+        }
+
+        res.status(200).json(responsePost)
     }
 
 
